@@ -1,0 +1,35 @@
+<%= form_for @workout, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :title, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :title, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :description, :class => 'text_area', :rows => 10 %>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls equipment">
+      <%= hidden_field_tag "workout[equipment_ids][]", nil %>
+      <% Equipment.all.each do |equipment| %>
+        <%= check_box_tag "workout[equipment_ids][]", equipment.id, @workout.equipment_ids.include?(equipment.id), id: dom_id(equipment) %>
+        <%= label_tag dom_id(equipment), equipment.name %><br>
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :source, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :source, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                workouts_path, :class => 'btn' %>
+  </div>
+<% end %>
