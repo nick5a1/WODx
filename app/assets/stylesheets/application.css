@@ -12,6 +12,6 @@
  *= require_tree .
  */
 
-.equipment label {
+.equipment label, #new_user label {
   display: inline;
  }
