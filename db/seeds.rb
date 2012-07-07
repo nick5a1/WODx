@@ -65,4 +65,5 @@ Workout.create(title: 'Burpees',
     %{Perform as many Burpees as possible in 7 minutes.},
   source:   'http://crossfit.com')
 # . . .
-
+Role.create(:name => "Admin")
+User.find(1).roles << Role.find(1)

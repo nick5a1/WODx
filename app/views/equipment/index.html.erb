@@ -18,19 +18,25 @@
         <td><%= equipment.name %></td>
         <td><%=l equipment.created_at %></td>
         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+          <% if can? :update, @equipment %>
+            <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_equipment_path(equipment), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          <% end %>
+          <% if can? :destroy, @equipment %>
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       equipment_path(equipment),
                       :method => :delete,
                       :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
                       :class => 'btn btn-mini btn-danger' %>
+          <% end %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_equipment_path,
+<% if can? :create, @equipment %>
+  <%= link_to t('.new', :default => t("helpers.links.new")), 
+  new_equipment_path,
             :class => 'btn btn-primary' %>
+<% end %>

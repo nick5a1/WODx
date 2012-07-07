@@ -10,6 +10,7 @@ gem 'sqlite3'
 gem 'activeadmin'
 
 gem 'devise'
+gem 'cancan'
 
 
 # Gems used only for assets and not required

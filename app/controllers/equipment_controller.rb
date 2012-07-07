@@ -1,6 +1,9 @@
 class EquipmentController < ApplicationController
   # GET /equipment
   # GET /equipment.json
+  
+  load_and_authorize_resource
+  
   def index
     @equipment = Equipment.all
 

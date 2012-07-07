@@ -22,8 +22,9 @@
         <a class="brand" href="/home">WODx</a>
         <div class="nav-collapse">
           <ul class="nav">
-            <li><%= link_to "Submit a WOD", "#" %></li>
-            <li><%= link_to "Contact", "#" %></li>
+            <li><%= link_to "Random", root_path %></li>
+            <li><%= link_to "All", workouts_path %></li>
+            <li><%= link_to "Admin", new_user_session_path %></li>
           </ul>
         </div>
       </div>
@@ -42,6 +43,12 @@
         &nbsp;
       </div>
       <div class="span8">
+        <% flash.each do |name, msg| %>
+          <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+            <a class="close" data-dismiss="alert">x</a>
+            <%= msg %>
+          </div>
+        <% end %>
         <%= yield %>
       </div>
     </div>

@@ -10,7 +10,11 @@
       <th><%= model_class.human_attribute_name(:description) %></th>
       <th><%= model_class.human_attribute_name(:equipment) %></th>
       <th><%= model_class.human_attribute_name(:source) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th>
+      <% if can? :update, @workout %>
+        <%=t '.actions', :default => t("helpers.actions") %>
+      <% end %>
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -22,19 +26,24 @@
         <td><% workout.equipment.each do |equipment| %><%= equipment.name %><br /><% end %></td>
         <td><%= workout.source %></td>
         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+          <% if can? :update, @workout %>
+            <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_workout_path(workout), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          <% end %>
+          <% if can? :destroy, @workout %>
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       workout_path(workout),
                       :method => :delete,
                       :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
                       :class => 'btn btn-mini btn-danger' %>
+          <% end %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+<% if can? :create, @workout %>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_workout_path,
             :class => 'btn btn-primary' %>
+<% end %>

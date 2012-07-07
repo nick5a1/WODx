@@ -1,6 +1,9 @@
 class WorkoutsController < ApplicationController
   # GET /workouts
   # GET /workouts.json
+  
+  load_and_authorize_resource
+  
   def index
     @workouts = Workout.all
     render :layout => "list"

@@ -17,4 +17,6 @@
     <%= submit_tag "Get Workout", :class => 'btn btn-primary' %>
   </div>
 <% end %>
+<% if can? :create, @workout %>
 <p><%=link_to "Add a minimal equipment workout", new_workout_path %></p>
+<% end %>
